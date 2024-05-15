@@ -1,3 +1,8 @@
+[user]
+	email = ttaylor@palantir.com
+	name = Tim T4 Taylor
+	signingkey = 71EA00C8361A849FE16EFFFA3EE9A11DBD48AF7D
+
 [alias]
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -87,7 +92,7 @@
 [core]
 
 	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/ttaylor/.gitignore_global
 	attributesfile = ~/.gitattributes
 
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -106,6 +111,7 @@
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
+	autocrlf = input
 
 [color]
 
@@ -133,9 +139,12 @@
 	untracked = cyan
 
 [commit]
+	template = /Users/ttaylor/.stCommitMsg
+	gpgsign = true
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
+#	gpgsign = true
+#	template = /Users/ttaylor/.stCommitMsg
 
 [diff]
 
@@ -185,3 +194,17 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[tag]
+	gpgsign = true
+	forceSignAnnotated = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
